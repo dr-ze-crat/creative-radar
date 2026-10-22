@@ -84,8 +84,25 @@ SIM_THRESHOLD = 0.55  # 标题字符集 Jaccard 阈值，调高更严格
 
 
 def data_path() -> str:
-    base = os.environ.get("LOCALAPPDATA") or BASE
-    d = os.path.join(base, "创作雷达")
+    """便携优先：程序同目录下的 data\\radar.db 可写就用它（U 盘带走全部设置与历史）。
+
+    不可写（U 盘写保护、安装在 Program Files 等）才退回 %LOCALAPPDATA%\\创作雷达。
+    """
+    if getattr(sys, "frozen", False):
+        base = os.path.dirname(os.path.abspath(sys.executable))
+    else:
+        base = BASE
+    portable = os.path.join(base, "data")
+    try:
+        os.makedirs(portable, exist_ok=True)
+        probe = os.path.join(portable, ".writetest")
+        with open(probe, "w", encoding="utf-8") as f:
+            f.write("ok")
+        os.remove(probe)
+        return os.path.join(portable, "radar.db")
+    except OSError:
+        pass
+    d = os.path.join(os.environ.get("LOCALAPPDATA") or base, "创作雷达")
     os.makedirs(d, exist_ok=True)
     return os.path.join(d, "radar.db")
 
@@ -567,13 +584,20 @@ class Api:
 
 def main():
     api = Api()
+    w, h = 1280, 820
+    try:  # 投影/小屏自适应：教室常见 1366×768
+        scr = webview.screens[0]
+        w = max(960, min(1280, int(scr.width) - 80))
+        h = max(600, min(820, int(scr.height) - 80))
+    except Exception:
+        pass
     webview.create_window(
         "创作雷达",
         url=resource(os.path.join("web", "index.html")),
         js_api=api,
-        width=1280,
-        height=820,
-        min_size=(980, 620),
+        width=w,
+        height=h,
+        min_size=(900, 560),
         background_color="#fffaf5",
     )
     webview.start()

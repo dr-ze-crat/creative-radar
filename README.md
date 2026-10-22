@@ -79,6 +79,12 @@
 dist\创作雷达\创作雷达.exe
 ```
 
+**便携 / U 盘 / 课堂演示版**
+
+打包好后把整个 `创作雷达` 文件夹（含 `_internal`）拷到目标电脑，数据会写在同目录 `data\radar.db`——拷走整个文件夹就带走收藏、设置与历史。想预置内容给离线演示，就把一份 `radar.db` 放进 `data\` 再打包。
+
+窗口尺寸按屏幕自适应（屏宽−80 / 屏高−80，最大 1280×820），投影分辨率 1366×768 也不会超出屏幕。
+
 解压后双击即可。首次启动会抓一次，约 2–4 秒。
 
 **开发运行**
@@ -126,7 +132,7 @@ dist\创作雷达\创作雷达.exe
 | 界面 | pywebview（WebView2）+ 单 HTML | 界面用 HTML/CSS 写，改一行刷新即见 |
 | 前后端 | pywebview `js_api` | **不起本地 HTTP 服务**，免端口冲突 |
 | 打包 | PyInstaller **onedir** | 单文件 exe 常被 Defender 误报；onedir 解压即用 |
-| 数据 | SQLite（`%LOCALAPPDATA%\创作雷达\radar.db`） | 要算升温必须存历史快照 |
+| 数据 | SQLite，**便携优先**：程序同目录 `data\radar.db` 可写就用它（U 盘带走收藏与设置），否则退回 `%LOCALAPPDATA%\创作雷达\radar.db` | 要算升温必须存历史快照 |
 | 图标 | Tabler Icons 3.49.0（MIT）+ 自绘应用图标 | 界面图标免费商用；应用图标为**透明底橙色渐变雷达**，由 `tools/make_icon.py` 用 Pillow 绘制 |
 | 配色 | **暖亮**：米白 `#fffaf5` 底 + 橙 `#ff7a45` 强调，侧栏浅米色分层 | 用户明确要求「明亮温暖」；暗色主题已弃用 |
 | 字体 | 系统字体栈 | 不下载字体，省体积 |
@@ -254,6 +260,7 @@ F:\视频创作助手\
 | 2026-10-22 | **v2 素材库**：Pexels 图片 + 视频搜索（`fetch_pexels.py`，免费 key、200 次/小时），结果网格带缩略图/尺寸/时长/作者；收藏进 `materials` 表生成**授权账本**，导出 Markdown 含作者、作者主页、原页、文件直链、授权、收录日期；按决定**不下载文件**。实测：Pexels API 无 key 401、CDN 可直连；Openverse/Wikimedia 本机不可达故放弃 |
 | 2026-10-22 | **素材库扩到五源**：新增 `fetch_pixabay.py`（图+视频）、`fetch_unsplash.py`（图）、`fetch_music.py`（ccMixter 免 key + Jamendo）；`material_search` 改为按已填 key 并行搜所有可用源、结果混排并标平台；materials 加 `license_url` 列（CC 授权可点回原文）；素材页加「音乐」类型、齿轮按钮改 key；账本导出按图片/视频/音乐分组，音乐组带 NC 警告。实测：ccMixter 12 条、导出含 CC 链接；修掉 ccMixter 在 limit≥15 时的 `LineTooLong`（放宽 `http.client._MAXLINE` 到 1MB） |
 | 2026-10-22 | **开源发布**：公开仓库 [dr-ze-crat/creative-radar](https://github.com/dr-ze-crat/creative-radar)（GPL-3.0）；v1.0.0 Release 附 Windows x64 打包 |
+| 2026-10-22 | **便携 + 课堂版**：`data_path()` 改为便携优先（程序同目录 `data\radar.db` 可写就用，否则回退 LOCALAPPDATA）；窗口尺寸按屏幕自适应；产出 `创作雷达_课堂版_2026-10-22.zip`（14.31 MB，含预置 9653 条热榜/54 批、3 条选题夹、2 条素材账本、`课堂使用说明.txt`） |
 
 ---
 
