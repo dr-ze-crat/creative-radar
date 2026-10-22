@@ -69,7 +69,11 @@
 
 ## 怎么用
 
-**直接使用（发给别人也是这个）**
+**下载现成的（Windows x64，不用装 Python）**
+
+到 [Releases](https://github.com/dr-ze-crat/creative-radar/releases) 下载 `CreativeRadar_v1.0.0_win64.zip`，解压双击 `创作雷达.exe`。
+
+**直接使用（自己打包后也是这个）**
 
 ```
 dist\创作雷达\创作雷达.exe
@@ -249,11 +253,11 @@ F:\视频创作助手\
 | 2026-10-22 | **P5 界面细节**：卡片紧凑化（标题单行 + hover 看全文、去掉重复组头、多平台链接并排、操作按钮 hover 才显）——一屏从 4 张到 6 张；侧栏分区 chips 改 flex-wrap，名字不再被省略；新增字号三档 A-/A/A+（基准 `--fs`，关键文字用 `calc(var(--fs)*系数)`）；新增「分区」面板可勾选隐藏不用的分区。设置存 SQLite `settings` 表（`file://` 下 localStorage 不可靠） |
 | 2026-10-22 | **v2 素材库**：Pexels 图片 + 视频搜索（`fetch_pexels.py`，免费 key、200 次/小时），结果网格带缩略图/尺寸/时长/作者；收藏进 `materials` 表生成**授权账本**，导出 Markdown 含作者、作者主页、原页、文件直链、授权、收录日期；按决定**不下载文件**。实测：Pexels API 无 key 401、CDN 可直连；Openverse/Wikimedia 本机不可达故放弃 |
 | 2026-10-22 | **素材库扩到五源**：新增 `fetch_pixabay.py`（图+视频）、`fetch_unsplash.py`（图）、`fetch_music.py`（ccMixter 免 key + Jamendo）；`material_search` 改为按已填 key 并行搜所有可用源、结果混排并标平台；materials 加 `license_url` 列（CC 授权可点回原文）；素材页加「音乐」类型、齿轮按钮改 key；账本导出按图片/视频/音乐分组，音乐组带 NC 警告。实测：ccMixter 12 条、导出含 CC 链接；修掉 ccMixter 在 limit≥15 时的 `LineTooLong`（放宽 `http.client._MAXLINE` 到 1MB） |
+| 2026-10-22 | **开源发布**：公开仓库 [dr-ze-crat/creative-radar](https://github.com/dr-ze-crat/creative-radar)（GPL-3.0）；v1.0.0 Release 附 Windows x64 打包 |
 
 ---
 
 ## 协议
-
 [GPL-3.0](LICENSE) © 2026 创作雷达 contributors
 
 界面图标来自 [Tabler Icons](https://tabler.io/icons)（MIT），素材来自 Pexels / Pixabay / Unsplash / ccMixter / Jamendo，各自授权见软件内「素材账本」。
