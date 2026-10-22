@@ -204,6 +204,7 @@ dist\创作雷达\创作雷达.exe
 - **素材库必须自己填 key**：图片/视频要 Pexels、Pixabay 或 Unsplash 任一 key；音乐 ccMixter 免 key、Jamendo 要 client_id。key 只存本机 `radar.db` 的 `settings` 表，不随 exe 分发，发给别人时对方要填自己的。
 - **素材只存链接不下载**：账本里是原页与文件直链，文件本身去 Pexels 官网下；这样不占磁盘也不替你决定用途。
 - **Pexels 免费额度 200 次/小时**，超了会提示「配额用完」。
+- **⚠ 分发前先清掉 key**：API key 存在 `data\radar.db` 的 `settings` 表里。把带 key 的 `data\` 连同程序发给别人（或上传网盘/仓库）＝把 key 一起给出去。分享前删掉整个 `data\` 文件夹即可（程序会自动新建空库）。
 - **启动即刷新**：先秒开上次数据，随即自动抓一次最新（约 2–4 秒）；也可随时手动「刷新」。
 - **打包后 exe 不弹黑框**（windowed），出错只体现在界面上的 toast，不会留控制台日志。
 
